@@ -1,0 +1,20 @@
+{
+  "name": "create-component-x",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ashleygwilliams/my_package.git"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postInstall.js"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.23.0",
+    "enquirer": "1.0.2",
+    "lodash.escaperegexp": "4.1.2",
+    "prompt-list": "2.1.0",
+    "yargs": "8.0.2"
+  }
+}
