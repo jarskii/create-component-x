@@ -2,10 +2,13 @@
   "name": "create-component-x",
   "version": "1.0.0",
   "main": "index.js",
-  "description": "",
+  "description": "Create component utility",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ashleygwilliams/my_package.git"
+    "url": "https://github.com/jarskii/create-component-x.git"
+  },
+  "bin": {
+    "create-component": "bin/create-component"
   },
   "scripts": {
     "postinstall": "node ./scripts/postInstall.js"
