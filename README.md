@@ -37,8 +37,8 @@ for example package.json content
 
 ```sh
 {
-    "name": "$compName\&-package",
+    "name": "$compName&-package",
     "version": "1.0.0",
-    "main": "./src/$compName\&.js"
+    "main": "./src/$compName&.js"
 }
 ```
