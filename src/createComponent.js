@@ -4,6 +4,31 @@ var config = require('../storage/config.json');
 var escapeRegExp = require('lodash.escaperegexp');
 var COMP_NAME_PAT = /\$compName\$/g;
 
+const isNumber =  (value) => !isNaN(Number(value));
+
+function flatten(input, reference, output) {
+  var output = output || [];
+  var reference = reference || '';
+
+  Object.keys(input).forEach(function(key) {
+    var value = input[key];
+
+    if (key) {
+      let slash = reference ? '/' : '';
+      let keyPart = isNumber(key) ? '' : slash + key
+      key = reference  + keyPart;
+    }
+
+    if (typeof value === 'object' && value !== null) {
+      flatten(value, key, output);
+    } else {
+      output.push(`${key.length ? ( key + '/' ) : '' }${value}`);
+    }
+  });
+
+  return output;
+}
+
 module.exports = function({template, componentName}) {
   var listOfTemplates = require(config.storagePath).list;
   var templateData = listOfTemplates[template];
@@ -14,30 +39,67 @@ module.exports = function({template, componentName}) {
 
   createFolder(newComponentPath);
 
-  files.forEach(function recursionFolder(fileName) {
-    if (typeof fileName === 'string') {
-      rewriteFileName({
-        sourcePath: path.join(sourcePath, fileName),
-        newComponentPath: path.join(newComponentPath, fileName),
-        componentName,
-        compNamePattern
-      });
-    } else if (typeof fileName === 'object') {
-      Object.keys(fileName).forEach(function(folder) {
-        var currentFolderPath = path.join(newComponentPath, folder);
-        createFolder(currentFolderPath);
+  var preparedFiles = flatten(files);
 
-        fileName[folder].forEach(function(file) {
-          rewriteFileName({
-            sourcePath: path.join(sourcePath, file),
-            newComponentPath: path.join(currentFolderPath, file),
-            componentName,
-            compNamePattern
-          });
-        });
+  console.log(preparedFiles)
+
+  preparedFiles.forEach(function(file) {
+    var filePathParts = file.split('/');
+    var reference = [];
+
+    if (filePathParts.length > 1) {
+      var folders = filePathParts.slice(0, filePathParts.length - 1);
+
+      folders.forEach(function(folder) {
+
+        reference.push(folder);
+
+        let currentFolderPath = path.join(newComponentPath, reference.join('/'));
+
+        console.log('currentFolderPath: ', currentFolderPath);
+
+        if (!fs.existsSync(currentFolderPath)) {
+          createFolder(currentFolderPath);
+        }
       });
     }
+
+    var fileName = filePathParts[filePathParts.length - 1]
+
+    rewriteFileName({
+      sourcePath: path.join(sourcePath, reference.join('/'), fileName),
+      newComponentPath: path.join(newComponentPath, reference.join('/'), fileName),
+      componentName,
+      compNamePattern
+    });
+
   });
+
+  //preparedFiles.forEach(function recursionFolder(fileName) {
+  //  if (typeof fileName === 'string') {
+  //    rewriteFileName({
+  //      sourcePath: path.join(sourcePath, fileName),
+  //      newComponentPath: path.join(newComponentPath, fileName),
+  //      componentName,
+  //      compNamePattern
+  //    });
+  //  } else if (typeof fileName === 'object') {
+  //    Object.keys(fileName).forEach(function(folder) {
+  //      var currentFolderPath = path.join(newComponentPath, folder);
+  //      createFolder(currentFolderPath);
+  //
+  //      fileName[folder].forEach(function(file) {
+  //        //rewriteFileName({
+  //        //  sourcePath: path.join(sourcePath, folder, file),
+  //        //  newComponentPath: path.join(currentFolderPath, file),
+  //        //  componentName,
+  //        //  compNamePattern
+  //        //});
+  //        recursionFolder(typeof file === 'object' ? file : path.join(folder, file))
+  //      });
+  //    });
+  //  }
+  //});
 };
 
 function rewriteFileName({sourcePath, newComponentPath, componentName, compNamePattern}) {
@@ -52,7 +114,6 @@ function rewriteFileName({sourcePath, newComponentPath, componentName, compNameP
 }
 
 function rewriteFileContent({content, newComponentPath, componentName, compNamePattern}) {
-  console.log(compNamePattern);
   content = content.replace(compNamePattern, componentName);
 
   fs.writeFileSync(newComponentPath.replace(compNamePattern, componentName), content, 'utf8');
