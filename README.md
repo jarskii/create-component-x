@@ -20,16 +20,16 @@ blueprint
 │   package.json
 │
 └───src
-│   │   $comp$.js
-│   │   $comp$.scss
+│   │   $compName$.js
+│   │   $compName$.scss
 │   │
 │   └───block
-│       │   $comp$-block.js
-│       │   $comp$-block.scss
+│       │   $compName$-block.js
+│       │   $compName$-block.scss
 │       │   ...
 │
 └───tests
-    └───$comp$-test.js
+    └───$compName$-test.js
 
 ```
 
@@ -37,8 +37,8 @@ for example package.json content
 
 ```sh
 {
-    "name": "$compName&-package",
+    "name": "$compName\&-package",
     "version": "1.0.0",
-    "main": "./src/$compName&.js"
+    "main": "./src/$compName\&.js"
 }
 ```
