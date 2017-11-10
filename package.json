@@ -8,7 +8,7 @@
     "url": "https://github.com/jarskii/create-component-x.git"
   },
   "bin": {
-    "create-component": "bin/create-component"
+    "c-c": "bin/create-component"
   },
   "scripts": {
     "postinstall": "node ./scripts/postInstall.js"
