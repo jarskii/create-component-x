@@ -14,7 +14,7 @@ Usage
 
 for example structure of blueprint folder:
 
-    ```sh
+
     blueprint
     │   README.md
     │   package.json
@@ -31,17 +31,17 @@ for example structure of blueprint folder:
     └───tests
         └───$compName$-test.js
 
-    ```
+
 
 for example package.json content
 
-    ```json
+
     {
         "name": "$compName&-package",
         "version": "1.0.0",
         "main": "./src/$compName&.js"
     }
-    ```
+   
 
 2. Write component info in storage:
 
