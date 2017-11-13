@@ -14,31 +14,49 @@ Usage
 
 for example structure of blueprint folder:
 
-```sh
-blueprint
-│   README.md
-│   package.json
-│
-└───src
-│   │   $compName$.js
-│   │   $compName$.scss
-│   │
-│   └───block
-│       │   $compName$-block.js
-│       │   $compName$-block.scss
-│       │   ...
-│
-└───tests
-    └───$compName$-test.js
+    ```sh
+    blueprint
+    │   README.md
+    │   package.json
+    │
+    └───src
+    │   │   $compName$.js
+    │   │   $compName$.scss
+    │   │
+    │   └───block
+    │       │   $compName$-block.js
+    │       │   $compName$-block.scss
+    │       │   ...
+    │
+    └───tests
+        └───$compName$-test.js
 
-```
+    ```
 
 for example package.json content
 
-```sh
-{
-    "name": "$compName&-package",
-    "version": "1.0.0",
-    "main": "./src/$compName&.js"
-}
-```
+    ```json
+    {
+        "name": "$compName&-package",
+        "version": "1.0.0",
+        "main": "./src/$compName&.js"
+    }
+    ```
+
+2. Write component info in storage:
+
+    ```sh
+        c-c use
+    ```
+    ... with custom pattern
+
+    ```sh
+        c-c use --pat="$comp$"
+    ```
+
+3. Create component:
+
+    ```sh
+        c-c create --name="SomeComponent"
+    ```
+    ...and will chose blueprint

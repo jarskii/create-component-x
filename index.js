@@ -4,13 +4,10 @@ var useTemplate = require('./src/useTemplate');
 
 yargs.command('create', 'creare component', (yargs) => {
   yargs.option('name', {
-    describe: 'Name of component',
+    describe: 'Component name',
     default: 'Component'
   })
   }, (argv) => {
-    if (argv.verbose) {
-      console.log('With vverbose')
-    }
     chooseTemplate({name: argv.name});
   })
   .option('verbose', {
@@ -21,7 +18,7 @@ yargs.command('create', 'creare component', (yargs) => {
 
 yargs.command('use', 'use template', (yargs) => {
   yargs.option('pat', {
-    describe: 'Name pattern. $compName$ by deafult',
+    describe: 'Pattern name. $compName$ by deafult',
     default: '$compName$'
   })
   }, (argv) => {

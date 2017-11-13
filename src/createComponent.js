@@ -41,8 +41,6 @@ module.exports = function({template, componentName}) {
 
   var preparedFiles = flatten(files);
 
-  console.log(preparedFiles)
-
   preparedFiles.forEach(function(file) {
     var filePathParts = file.split('/');
     var reference = [];
@@ -56,15 +54,13 @@ module.exports = function({template, componentName}) {
 
         let currentFolderPath = path.join(newComponentPath, reference.join('/'));
 
-        console.log('currentFolderPath: ', currentFolderPath);
-
         if (!fs.existsSync(currentFolderPath)) {
           createFolder(currentFolderPath);
         }
       });
     }
 
-    var fileName = filePathParts[filePathParts.length - 1]
+    var fileName = filePathParts[filePathParts.length - 1];
 
     rewriteFileName({
       sourcePath: path.join(sourcePath, reference.join('/'), fileName),
@@ -74,32 +70,6 @@ module.exports = function({template, componentName}) {
     });
 
   });
-
-  //preparedFiles.forEach(function recursionFolder(fileName) {
-  //  if (typeof fileName === 'string') {
-  //    rewriteFileName({
-  //      sourcePath: path.join(sourcePath, fileName),
-  //      newComponentPath: path.join(newComponentPath, fileName),
-  //      componentName,
-  //      compNamePattern
-  //    });
-  //  } else if (typeof fileName === 'object') {
-  //    Object.keys(fileName).forEach(function(folder) {
-  //      var currentFolderPath = path.join(newComponentPath, folder);
-  //      createFolder(currentFolderPath);
-  //
-  //      fileName[folder].forEach(function(file) {
-  //        //rewriteFileName({
-  //        //  sourcePath: path.join(sourcePath, folder, file),
-  //        //  newComponentPath: path.join(currentFolderPath, file),
-  //        //  componentName,
-  //        //  compNamePattern
-  //        //});
-  //        recursionFolder(typeof file === 'object' ? file : path.join(folder, file))
-  //      });
-  //    });
-  //  }
-  //});
 };
 
 function rewriteFileName({sourcePath, newComponentPath, componentName, compNamePattern}) {
