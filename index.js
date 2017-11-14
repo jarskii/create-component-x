@@ -1,3 +1,5 @@
+require("babel-register");
+
 var yargs = require('yargs');
 var chooseTemplate = require('./src/chooseTemplate');
 var useTemplate = require('./src/useTemplate');
