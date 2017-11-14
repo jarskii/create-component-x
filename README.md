@@ -59,4 +59,4 @@ for example package.json content
     ```sh
         c-c create --name="SomeComponent"
     ```
-    ...and will chose blueprint
+    ...and will select blueprint
