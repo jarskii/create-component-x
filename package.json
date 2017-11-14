@@ -11,14 +11,20 @@
     "c-c": "bin/create-component"
   },
   "scripts": {
-    "postinstall": "node ./scripts/postInstall.js"
+    "postinstall": "node ./scripts/postInstall.js && npm run build",
+    "build": "/node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator"
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
-    "babel-register": "^6.26.0",
+    "babel-register": "6.26.0",
     "enquirer": "1.0.2",
     "lodash.escaperegexp": "4.1.2",
     "prompt-list": "2.1.0",
     "yargs": "8.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-plugin-transform-async-to-generator": "6.24.1",
+    "babel-preset-es2015": "6.24.1"
   }
 }

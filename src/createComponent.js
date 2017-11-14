@@ -70,6 +70,8 @@ module.exports = function({template, componentName}) {
     });
 
   });
+
+  console.info('Success! Path: ', newComponentPath);
 };
 
 function rewriteFileName({sourcePath, newComponentPath, componentName, compNamePattern}) {

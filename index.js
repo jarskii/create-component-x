@@ -1,8 +1,6 @@
-require("babel-register");
-
 var yargs = require('yargs');
-var chooseTemplate = require('./src/chooseTemplate');
-var useTemplate = require('./src/useTemplate');
+var chooseTemplate = require('./lib/chooseTemplate');
+var useTemplate = require('./lib/useTemplate');
 
 yargs.command('create', 'creare component', (yargs) => {
   yargs.option('name', {
