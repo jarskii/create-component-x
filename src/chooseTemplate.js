@@ -1,3 +1,4 @@
+require('babel-polyfill');
 var List = require('prompt-list');
 var config = require('../storage/config.json');
 var createComponent = require('./createComponent.js');
@@ -12,7 +13,7 @@ module.exports = async function({name}) {
     var ask = await enquirer.ask();
     name = ask.componentName;
   }
-  
+
   var listOfTemplates = require(config.storagePath).list;
 
   var list = new List({
