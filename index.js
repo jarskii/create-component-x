@@ -5,7 +5,6 @@ var useTemplate = require('./lib/useTemplate');
 yargs.command('create', 'creare component', (yargs) => {
   yargs.option('name', {
     describe: 'Component name',
-    default: 'Component'
   })
   }, (argv) => {
     chooseTemplate({name: argv.name});
