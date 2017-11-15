@@ -17,7 +17,7 @@ module.exports = async function({name}) {
   var listOfTemplates = require(config.storagePath).list;
 
   if (!listOfTemplates.length) {
-    console.error(`You haven't list of templates. Use "c-c use" to add blueprint in list of templates`);
+    console.error(`You list of templates is empty. Use "c-c use" to add blueprint in list of templates`);
   }
 
   var list = new List({
