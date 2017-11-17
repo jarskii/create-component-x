@@ -1,6 +1,6 @@
 {
   "name": "create-component-x",
-  "version": "1.0.18",
+  "version": "1.1.0",
   "main": "index.js",
   "description": "Create component utility",
   "repository": {
