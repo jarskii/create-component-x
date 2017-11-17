@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import styles from './$compName$.scss';
 
-class $compName$ extends Component {
+class $compName$ extends PureComponent {
   static propTypes = {};
   static defaultProps = {};
 

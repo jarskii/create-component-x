@@ -1,9 +1,12 @@
-var fs = require('fs');
-var path = require('path');
-var config = require('../storage/config.json');
-var escapeRegExp = require('lodash.escaperegexp');
-var COMP_NAME_PAT = /\$compName\$/g;
+import 'babel-polyfill';
+import fs from 'fs';
+import path from 'path';
+import escapeRegExp from 'lodash.escaperegexp';
+import createFolder from './helpers/createFolder';
 
+import config from '../storage/config.json';
+
+const COMP_NAME_PAT = /\$compName\$/g;
 const isNumber =  (value) => !isNaN(Number(value));
 
 function flatten(input, reference, output) {
@@ -29,7 +32,7 @@ function flatten(input, reference, output) {
   return output;
 }
 
-module.exports = function({template, componentName}) {
+export default function({template, componentName}) {
   var listOfTemplates = require(config.storagePath).list;
   var templateData = listOfTemplates[template];
   var files = templateData.files;
@@ -91,10 +94,3 @@ function rewriteFileContent({content, newComponentPath, componentName, compNameP
   fs.writeFileSync(newComponentPath.replace(compNamePattern, componentName), content, 'utf8');
 }
 
-function createFolder(dir) {
-  if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-  } else {
-    throw new Error('Folder already exist!');
-  }
-}
