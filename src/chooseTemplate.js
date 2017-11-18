@@ -5,12 +5,12 @@ var createComponent = require('./createComponent.js');
 var Enquirer = require('enquirer');
 var enquirer = new Enquirer();
 
-module.exports = async function({name}) {
+export default async function({name}) {
   console.info('Create component...');
 
   if (!name) {
     enquirer.question('componentName', 'What are name of component?');
-    var ask = await enquirer.ask();
+    const ask = await enquirer.ask();
     name = ask.componentName;
   }
 

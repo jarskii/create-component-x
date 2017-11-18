@@ -3,53 +3,31 @@ import fs from 'fs';
 import path from 'path';
 import escapeRegExp from 'lodash.escaperegexp';
 import createFolder from './helpers/createFolder';
+import flatten from './helpers/flatten';
 
 import config from '../storage/config.json';
 
 const COMP_NAME_PAT = /\$compName\$/g;
-const isNumber =  (value) => !isNaN(Number(value));
-
-function flatten(input, reference, output) {
-  var output = output || [];
-  var reference = reference || '';
-
-  Object.keys(input).forEach(function(key) {
-    var value = input[key];
-
-    if (key) {
-      let slash = reference ? '/' : '';
-      let keyPart = isNumber(key) ? '' : slash + key
-      key = reference  + keyPart;
-    }
-
-    if (typeof value === 'object' && value !== null) {
-      flatten(value, key, output);
-    } else {
-      output.push(`${key.length ? ( key + '/' ) : '' }${value}`);
-    }
-  });
-
-  return output;
-}
 
 export default function({template, componentName}) {
-  var listOfTemplates = require(config.storagePath).list;
-  var templateData = listOfTemplates[template];
-  var files = templateData.files;
-  var sourcePath = templateData.path;
-  var compNamePattern = new RegExp(escapeRegExp(templateData.pat), 'g') || COMP_NAME_PAT;
-  var newComponentPath = path.join(process.cwd(), componentName);
+  const listOfTemplates = require(config.storagePath).list;
+  const templateData = listOfTemplates[template];
+  const files = templateData.files;
+  const sourcePath = templateData.path;
+  const compNamePattern = new RegExp(escapeRegExp(templateData.pat), 'g') || COMP_NAME_PAT;
+  const newComponentPath = path.join(process.cwd(), componentName);
 
   createFolder(newComponentPath);
 
-  var preparedFiles = flatten(files);
+  const preparedFiles = flatten(files);
+
 
   preparedFiles.forEach(function(file) {
-    var filePathParts = file.split('/');
-    var reference = [];
+    const filePathParts = file.split('/');
+    const reference = [];
 
     if (filePathParts.length > 1) {
-      var folders = filePathParts.slice(0, filePathParts.length - 1);
+      const folders = filePathParts.slice(0, filePathParts.length - 1);
 
       folders.forEach(function(folder) {
 
@@ -78,7 +56,7 @@ export default function({template, componentName}) {
 };
 
 function rewriteFileName({sourcePath, newComponentPath, componentName, compNamePattern}) {
-  var blueprintContent = fs.readFileSync(path.resolve(sourcePath), 'utf8');
+  const blueprintContent = fs.readFileSync(path.resolve(sourcePath), 'utf8');
 
   rewriteFileContent({
     content: blueprintContent,
