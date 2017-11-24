@@ -12,7 +12,7 @@ Usage
 
 1. Make blueprint folder with files for the future component, where $compName$ is the future component name part (also you could add $compName$ inside code)
 
-for example structure of blueprint folder:
+for example structure of [blueprint folder](https://github.com/jarskii/create-component-x/tree/master/examples/blueprint):
 
 
     blueprint
