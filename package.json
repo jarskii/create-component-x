@@ -11,7 +11,7 @@
     "c-c": "bin/create-component"
   },
   "scripts": {
-    "postinstall": "node ./scripts/postInstall.js",
+    "install": "node ./scripts/postInstall.js",
     "prepublish": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports"
   },
   "dependencies": {
