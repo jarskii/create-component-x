@@ -1,6 +1,6 @@
 {
   "name": "create-component-x",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "main": "index.js",
   "description": "Create component utility",
   "repository": {
@@ -13,6 +13,9 @@
   "scripts": {
     "install": "node ./scripts/postInstall.js",
     "prepublish": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",

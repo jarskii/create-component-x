@@ -12,14 +12,15 @@ fs.readFile(CONFIG_PATH, function(err, data) {
     console.error(err);
   }
 
+  var config = JSON.parse(data);
+
+  config.storagePath = STORAGE_PATH;
+
   createFolder(CREATE_COMPONENT_SYS_PATH).then((folder) => {
-    var config = JSON.parse(data);
-
-    config.storagePath = STORAGE_PATH;
-
     fs.writeFileSync(CONFIG_PATH, JSON.stringify(config), 'utf8');
     fs.writeFileSync(STORAGE_PATH, JSON.stringify({list: {}}), 'utf8');
   }).catch(() => {
+    fs.writeFileSync(CONFIG_PATH, JSON.stringify(config), 'utf8');
     console.info('Good! Config aready exist');
   });
 });
