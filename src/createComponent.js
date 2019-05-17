@@ -51,19 +51,21 @@ export default function({template, componentName}) {
     });
 
   });
-
-  console.info('Success! Path: ', newComponentPath);
 };
 
 function rewriteFileName({sourcePath, newComponentPath, componentName, compNamePattern}) {
-  const blueprintContent = fs.readFileSync(path.resolve(sourcePath), 'utf8');
+  try {
+    const blueprintContent = fs.readFileSync(path.resolve(sourcePath), 'utf8');
 
-  rewriteFileContent({
-    content: blueprintContent,
-    newComponentPath,
-    componentName,
-    compNamePattern
-  })
+    rewriteFileContent({
+      content: blueprintContent,
+      newComponentPath,
+      componentName,
+      compNamePattern
+    })
+  } catch(e) {
+    console.error(sourcePath, ' - file was deleted');
+  }
 }
 
 function rewriteFileContent({content, newComponentPath, componentName, compNamePattern}) {

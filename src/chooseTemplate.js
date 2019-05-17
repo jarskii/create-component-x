@@ -14,6 +14,8 @@ export default async function({name}) {
     name = ask.componentName;
   }
 
+  console.log(config);
+
   var listOfTemplates = require(config.storagePath).list;
 
   if (!Object.keys(listOfTemplates).length) {
