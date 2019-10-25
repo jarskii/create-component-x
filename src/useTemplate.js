@@ -9,7 +9,7 @@ const enquirer = new Enquirer();
 
 export default async function({name, pat}) {
   if (!name) {
-    enquirer.question('templateName', 'What are name of template?');
+    enquirer.question('templateName', 'What is the name of the blueprint?');
     const ask = await enquirer.ask();
     name = ask.templateName;
   }
@@ -32,7 +32,7 @@ export default async function({name, pat}) {
       if (err) {
         console.error(err);
       } else {
-        console.info('Template added successfully!')
+        console.info('Blueprint added successfully!')
       }
     });
   });

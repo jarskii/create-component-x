@@ -1,62 +1,80 @@
-create-component-x is a command-line tool that allows you create component structure by blueprint
+create-component-x is a command-line tool that allows you to create a component based on a blueprint
 
 Installation
 --------------
 
-```sh
-npm i create-component-x -g
+```
+npm i -g create-component-x
 ```
 
 Usage
 --------------
 
-1. Make blueprint folder with files for the future component, where $compName$ is the future component name part (also you could add $compName$ inside code)
+#### Create a blueprint
 
-for example structure of [blueprint folder](https://github.com/jarskii/create-component-x/tree/master/examples/blueprint):
+Blueprint is a folder with component's structure. Use `$compName$` as a placeholder for component name in filenames and inside the code.
 
+Example of [blueprint folder](https://github.com/jarskii/create-component-x/tree/master/examples/blueprint):
 
-    blueprint
-    │   README.md
-    │   package.json
-    │
-    └───src
-    │   │   $compName$.js
-    │   │   $compName$.scss
-    │   │
-    │   └───block
-    │       │   $compName$-block.js
-    │       │   $compName$-block.scss
-    │       │   ...
-    │
-    └───tests
-        └───$compName$-test.js
+```
+blueprint
+│
+│───src
+│   │–––$compName$.js
+│   └───$compName$.scss
+│
+│──tests
+│   └───$compName$-test.js
+│
+│–––README.md
+└───package.json
+```
 
-
-
-for example package.json content
+Example of component's blueprint:
 
 
-    {
-        "name": "$compName&-package",
-        "version": "1.0.0",
-        "main": "./src/$compName&.js"
-    }
+```javascript
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
+import cls from 'classnames';
+import styles from './$compName$.scss';
+
+class $compName$ extends PureComponent {
+  static propTypes = {};
+  static defaultProps = {};
+  render() {
+    return (
+      <div className={styles.$compName$}>
+        $compName$
+      </div>
+    );
+  }
+}
+
+export default $compName$;
+```
+
    
 
-2. Write component info in storage:
+#### Use the blueprint
 
-    ```sh
-        c-c use
-    ```
-    ... with custom pattern
+Go to the blueprint folder and add it to the storage for further use:
 
-    ```sh
-        c-c use --pat="$comp$"
-    ```
+    c-c use
 
-3. Create component:
+#### Create a component
 
-    ```sh
-        c-c create --name="SomeComponent"
-    ```
-    ...and will select blueprint
+To create a component go to the target directory and run:
+
+    c-c create
+    
+Then enter component's name and select a blueprint from the list. Component is created!
+
+
+Options
+--------------
+
+Custom pattern for placeholder could be used:
+    
+    c-c use --pat="$comp$"
