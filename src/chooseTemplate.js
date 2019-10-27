@@ -1,11 +1,14 @@
-require('babel-polyfill');
-var List = require('prompt-list');
-var config = require('../storage/config.json');
-var createComponent = require('./createComponent.js');
-var Enquirer = require('enquirer');
-var enquirer = new Enquirer();
+import 'babel-polyfill';
 
-export default async function({name}) {
+import Enquirer from 'enquirer';
+import List from 'prompt-list';
+
+import config from '../storage/config.json';
+import createComponent from './createComponent.js';
+
+const enquirer = new Enquirer();
+
+export default async function({ name }) {
   console.info('Create component...');
 
   if (!name) {
@@ -13,8 +16,6 @@ export default async function({name}) {
     const ask = await enquirer.ask();
     name = ask.componentName;
   }
-
-  console.log(config);
 
   var listOfTemplates = require(config.storagePath).list;
 
@@ -34,4 +35,4 @@ export default async function({name}) {
       componentName: name
     })
   });
-};
+}
