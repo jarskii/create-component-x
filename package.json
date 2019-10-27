@@ -12,7 +12,9 @@
   },
   "scripts": {
     "install": "node ./scripts/postInstall.js",
-    "prepublish": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports"
+    "prepublish": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports",
+    "test": "jest",
+    "lint": "eslint"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -30,6 +32,10 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-es2015": "6.24.1",
+    "commander": "^3.0.2",
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0",
+    "memfs": "^2.16.0",
     "mocha": "^4.0.1"
   },
   "files": [

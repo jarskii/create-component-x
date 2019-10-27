@@ -1,6 +1,6 @@
-var yargs = require('yargs');
-var chooseTemplate = require('./lib/chooseTemplate');
-var useTemplate = require('./lib/useTemplate');
+const yargs = require('yargs');
+const chooseTemplate = require('./lib/chooseTemplate');
+const useTemplate = require('./lib/useTemplate');
 
 yargs.command('create', 'creare component', (yargs) => {
   yargs.option('name', {
@@ -13,7 +13,7 @@ yargs.command('create', 'creare component', (yargs) => {
     alias: 'v',
     default: false
   })
-  .argv
+  .argv;
 
 yargs.command('use', 'use template', (yargs) => {
   yargs.option('pat', {
@@ -31,4 +31,4 @@ yargs.command('use', 'use template', (yargs) => {
     alias: 'n',
     default: false
   })
-  .argv
+  .argv;
