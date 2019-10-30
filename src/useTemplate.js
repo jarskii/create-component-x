@@ -1,17 +1,21 @@
 import 'babel-polyfill';
 import fs from 'fs';
-import path from 'path';
-import Enquirer from 'enquirer';
+import { prompt } from 'enquirer';
 import config from '../storage/config.json';
 import getDirFilesSync from './helpers/getDirFilesSync';
 
-const enquirer = new Enquirer();
-
 export default async function({name, pat}) {
-  if (!name) {
-    enquirer.question('templateName', 'What is the name of the blueprint?');
-    const ask = await enquirer.ask();
-    name = ask.templateName;
+  let blueprintName = name;
+
+  if (!blueprintName) {
+    const answer = await prompt({
+      type: 'input',
+      name: 'templateName',
+      message: 'What is the name of the blueprint?'
+    });
+
+    // eslint-disable-next-line require-atomic-updates
+    blueprintName = answer.templateName;
   }
 
   fs.readFile(config.storagePath, function(err, data) {
@@ -22,7 +26,7 @@ export default async function({name, pat}) {
     const storage = JSON.parse(data);
     const currentPath = process.cwd();
 
-    storage.list[name] = {
+    storage.list[blueprintName] = {
       path: currentPath,
       pat: pat,
       files: getDirFilesSync(currentPath)
@@ -36,6 +40,6 @@ export default async function({name, pat}) {
       }
     });
   });
-};
+}
 
 

@@ -1,38 +1,42 @@
 import 'babel-polyfill';
 
-import Enquirer from 'enquirer';
-import List from 'prompt-list';
+import { prompt, Select } from 'enquirer';
 
 import config from '../storage/config.json';
 import createComponent from './createComponent.js';
 
-const enquirer = new Enquirer();
+const listOfTemplates = require(config.storagePath).list;
+
+if (!Object.keys(listOfTemplates).length) {
+  console.error(`Your list of blueprints is empty. Use "c-c use" to add a blueprint to the list`);
+}
 
 export default async function({ name }) {
   console.info('Create component...');
 
-  if (!name) {
-    enquirer.question('componentName', 'What is the name of the component?');
-    const ask = await enquirer.ask();
-    name = ask.componentName;
+  let componentName = name;
+
+  if (!componentName) {
+    const answer = await prompt({
+      type: 'input',
+      name: 'componentName',
+      message: 'What is the name of the component?'
+    });
+
+    // eslint-disable-next-line require-atomic-updates
+    componentName = answer.componentName;
   }
 
-  var listOfTemplates = require(config.storagePath).list;
-
-  if (!Object.keys(listOfTemplates).length) {
-    console.error(`Your list of blueprints is empty. Use "c-c use" to add a blueprint to the list`);
-  }
-
-  var list = new List({
+  const templatesPrompt = new Select({
     name: 'Templates',
     message: 'Choose a blueprint:',
     choices: Object.keys(listOfTemplates)
   });
 
-  list.ask(function(answer) {
-    createComponent({
-      template: answer,
-      componentName: name
-    })
+  const template = await templatesPrompt.run();
+
+  createComponent({
+    template,
+    componentName
   });
 }
