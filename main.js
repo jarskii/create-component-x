@@ -32,3 +32,11 @@ yargs.command('use', 'use template', (yargs) => {
     default: false
   })
   .argv;
+
+
+process.on('unhandledRejection', error => {
+  if (error) {
+    console.error('UnhandledRejection create-component-x: ', error.message);
+  }
+});
+

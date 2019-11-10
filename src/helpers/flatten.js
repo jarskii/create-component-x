@@ -1,11 +1,8 @@
 const isNumber =  (value) => !isNaN(Number(value));
 
-export default function flatten(input, reference, output) {
-  var output = output || [];
-  var reference = reference || '';
-
+export default function flatten(input, reference = '', output = []) {
   Object.keys(input).forEach(function(key) {
-    var value = input[key];
+    const value = input[key];
 
     if (key) {
       let slash = reference ? '/' : '';

@@ -1,25 +1,28 @@
 const path = require('path');
 const exec = require('child_process').exec;
 
-test('Tesling CLI commands', async (done) => {
-  let result = await cli(['use'], '.');
+test('Tesling CLI command create', async (done) => {
+  const { stdout } = await exec(`node ${path.resolve("./index")} create`);
 
-  expect(result.stdout).toContain("Create component");
+  const data = await promisifyStdout(stdout);
+
+  done();
+
+  expect(data.toString()).toBe("Create component...");
 });
 
-function cli(args, cwd) {
-  return new Promise(resolve => {
-    exec(
-      `node ${path.resolve("./index")} ${args.join(" ")}`,
-      { cwd },
-      (error, stdout, stderr) => {
-        resolve({
-          code: error && error.code ? error.code : 0,
-          error,
-          stdout,
-          stderr
-        });
+
+const promisifyStdout = (stdout) => {
+  return new Promise((resolve, reject) => {
+    stdout.on('data', (data, err) => {
+      if (err) {
+        reject(err);
+
+        return;
       }
-    );
-  });
-}
+
+      resolve(data);
+    });
+  })
+};
+

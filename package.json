@@ -14,8 +14,7 @@
     "start": "",
     "install": "node ./scripts/postInstall.js",
     "prepublish.bak": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports",
-    "test": "jest --watch",
-    "lint": "eslint"
+    "test": "jest --watch"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
