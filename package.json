@@ -13,12 +13,13 @@
   "scripts": {
     "start": "",
     "install": "node ./scripts/postInstall.js",
-    "prepublish.bak": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports",
+    "prepublish": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports",
     "test": "jest -c ./jest.config.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
+  "keywords": ["create file structure", "generate react component", "react components"],
   "dependencies": {
     "babel-polyfill": "6.23.0",
     "babel-register": "6.26.0",

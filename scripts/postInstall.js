@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const createFolder = require('../src/helpers/createFolder');
+const createFolder = require('../lib/helpers/createFolder');
 
 const CONFIG_PATH = path.resolve('storage', 'config.json');
 const HOME_DIR_PATH = require('os').homedir();
