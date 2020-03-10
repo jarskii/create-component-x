@@ -1,6 +1,6 @@
 {
   "name": "create-component-x",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "index.js",
   "description": "Create component utility",
   "repository": {
@@ -19,7 +19,11 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "keywords": ["create file structure", "generate react component", "react components"],
+  "keywords": [
+    "create file structure",
+    "generate react component",
+    "react components"
+  ],
   "dependencies": {
     "babel-polyfill": "6.23.0",
     "babel-register": "6.26.0",
