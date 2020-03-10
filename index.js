@@ -1,34 +1,10 @@
-const yargs = require('yargs');
-const chooseTemplate = require('./lib/chooseTemplate');
-const useTemplate = require('./lib/useTemplate');
+const path = require('path');
+const rootPath = path.join(__dirname);
 
-yargs.command('create', 'creare component', (yargs) => {
-  yargs.option('name', {
-    describe: 'Component name',
-  })
-  }, (argv) => {
-    chooseTemplate({name: argv.name});
-  })
-  .option('verbose', {
-    alias: 'v',
-    default: false
-  })
-  .argv;
+require('@babel/register')({
+  root: rootPath,
+  ignore: [/node_modules/],
+  only: [rootPath],
+});
 
-yargs.command('use', 'use template', (yargs) => {
-  yargs.option('pat', {
-    describe: 'Pattern name. $compName$ by deafult',
-    default: '$compName$'
-  })
-  }, (argv) => {
-
-    useTemplate({
-      name: argv.name,
-      pat: argv.pat,
-    });
-  })
-  .option('name', {
-    alias: 'n',
-    default: false
-  })
-  .argv;
+require('./main');

@@ -11,10 +11,10 @@
     "c-c": "bin/create-component"
   },
   "scripts": {
+    "start": "",
     "install": "node ./scripts/postInstall.js",
-    "prepublish": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports",
-    "test": "jest",
-    "lint": "eslint"
+    "prepublish.bak": "./node_modules/.bin/babel src --out-dir lib --presets=es2015 --plugins=transform-async-to-generator,add-module-exports",
+    "test": "jest -c ./jest.config.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -22,21 +22,27 @@
   "dependencies": {
     "babel-polyfill": "6.23.0",
     "babel-register": "6.26.0",
-    "enquirer": "1.0.2",
+    "enquirer": "2.3.2",
     "lodash.escaperegexp": "4.1.2",
     "prompt-list": "2.1.0",
     "yargs": "8.0.2"
   },
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-async-to-generator": "6.24.1",
-    "babel-preset-es2015": "6.24.1",
-    "commander": "^3.0.2",
-    "eslint": "^6.6.0",
-    "jest": "^24.9.0",
-    "memfs": "^2.16.0",
-    "mocha": "^4.0.1"
+    "@babel/core": "7.6.4",
+    "@babel/plugin-transform-async-to-generator": "7.5.0",
+    "@babel/plugin-transform-modules-commonjs": "7.6.0",
+    "@babel/polyfill": "7.6.0",
+    "@babel/preset-env": "7.6.3",
+    "@babel/register": "7.6.2",
+    "babel-plugin-add-module-exports": "1.0.2",
+    "babel-plugin-dynamic-import-node": "2.3.0",
+    "bdd-stdin": "0.2.0",
+    "eslint": "6.6.0",
+    "jest": "25.1.0",
+    "jest-cli": "25.1.0",
+    "memfs": "2.16.0",
+    "mocha": "4.0.1",
+    "mock-stdin": "1.0.0"
   },
   "files": [
     "bin/create-component",
