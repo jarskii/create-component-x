@@ -51,6 +51,8 @@
     "scripts",
     "storage",
     "index.js",
+    "main.js",
+    "babel.config.js",
     "README.md"
   ]
 }
