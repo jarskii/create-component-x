@@ -1,6 +1,5 @@
 const path = require('path');
 const exec = require('child_process').exec;
-const bddStdin = require('bdd-stdin');
 
 const timeout = (time) => new Promise((resovle) => {
   setTimeout(() => resovle(), time)
