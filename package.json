@@ -1,6 +1,6 @@
 {
   "name": "create-component-x",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "index.js",
   "description": "Create component utility",
   "repository": {
@@ -38,7 +38,6 @@
     "babel-plugin-add-module-exports": "1.0.2",
     "babel-plugin-dynamic-import-node": "2.3.0",
     "bdd-stdin": "0.2.0"
-
   },
   "devDependencies": {
     "eslint": "6.6.0",
