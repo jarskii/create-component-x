@@ -1,6 +1,6 @@
-import yargs from 'yargs';
-const chooseTemplate = require('./src/chooseTemplate');
-const useTemplate = require('./src/useTemplate');
+const yargs = require('yargs');
+const chooseTemplate = require('./lib/chooseTemplate');
+const useTemplate = require('./lib/useTemplate');
 
 yargs.command('create', 'creare component', (yargs) => {
   yargs.option('name', {
