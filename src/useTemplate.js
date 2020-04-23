@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import fs from 'fs';
 import { prompt } from 'enquirer';
 import config from '../storage/config.json';
